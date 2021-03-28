@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
-    <title>{% block blub %}{% endblock %}</title>
-</head>
-<body style="background-color:#222222">
-    <h1>{% block title %}{% endblock %}</h1>
-    <p>{% block content %}{% endblock %}</p>
-
     #range input
     <!--
     <form>
@@ -35,25 +23,43 @@
           <label class="form-check-label" for="inlineCheckbox3">3</label>
         </div>
      -->
-    #Dropdown Liste mit Submit Button
-    <!--
-    <form>
+
+
+
+
+
+
+    <!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body style="background-color:#222222">
+    <h1>Letztes Kriterium angeben:</h1>
+
+    <!--Dropdown Liste mit Submit Button-->
+    <form action ="http://127.0.0.1:5000/alleKriterienUndEmpfehlung" method = "post">
       <div class="form-row align-items-center">
-        <div class="col-auto my-1">
+        <!--<div class="col-auto my-1">
           <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-            <option selected>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="choose">
+              {% for b in preferenceList %}
+            <option value="{{b[0]}}">{{b[0]}}</option>
+              {% endfor %}
           </select>
+        </div>-->
         </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <div>
+          <button href="http://127.0.0.1:5000/erstesKriterium" class="btn btn-primary">Vorheriges Kriterium</button>
+          <button type="submit" class="btn btn-primary">Nächstes Kriterium</button>
+
         </div>
       </div>
     </form>
-    -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
