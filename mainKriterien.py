@@ -29,14 +29,46 @@ def erstesKriterium():
 
 @app.route("/letztesKriterium", methods = ["GET", "POST"])
 def letztesKriterium():
-    if request.method == "POST":
-        cursor.execute("SELECT preference2 FROM vorgehensmodelle.broetchen;")
-        preferenceList = cursor.fetchall()
-        return render_template("letztesKriterium.html", preferenceList=preferenceList)
-
+    firstChoice = request.form["choose"]
+    cursor.execute("DELETE FROM wahl1;")
+    con.commit()
+    cursor.execute("INSERT INTO vorgehensmodelle.wahl1(wahl1) VALUES (" + "'" + firstChoice + "'" + ")")
+    con.commit()
+    cursor.execute("SELECT preference2 FROM vorgehensmodelle.broetchen;")
+    preferenceList = cursor.fetchall()
+    return render_template("letztesKriterium.html", preferenceList=preferenceList, firstChoice=firstChoice)
 @app.route("/alleKriterienUndEmpfehlung", methods = ["GET", "POST"])
 def alleKriterienUndEmpfehlung():
-    return render_template("alleKriterienUndEmpfehlung.html")
+    if request.method == "POST":
+        secondChoice = request.form["choose"]
+        cursor.execute("DELETE FROM wahl2;")
+        cursor.execute("INSERT INTO vorgehensmodelle.wahl2(wahl2) VALUES (" + "'" + secondChoice + "'" + ")")
+        con.commit()
+        cursor.execute("SELECT * FROM vorgehensmodelle.wahl1 LIMIT 1")
+        first = cursor.fetchall()
+        firstChoice = first[0][0]
+        print(firstChoice)
+        #Problem: (('Vollkorn',),) ist die Ausgabe
+        #print("SELECT count(*) FROM vorgehensmodelle.broetchen WHERE preference ='" + str(firstChoice) + "' && preference2 =" + "'" + secondChoice + "';")
+
+        if cursor.execute("SELECT count(*) FROM vorgehensmodelle.broetchen WHERE preference ='" + firstChoice + "' && preference2 =" + "'" + secondChoice + "';") == 1:
+            cursor.execute("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference ='" + firstChoice + "' && preference2 =" + "'" + secondChoice + "';")
+            best = cursor.fetchall()
+            cursor.execute("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference ='" + firstChoice + "' && preference2 =" + "'" + secondChoice + "';")
+            best1 = cursor.fetchone()
+            bestFit = best[0][0]
+            print("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference ='" + firstChoice + "' && preference2 =" + "'" + secondChoice + "';")
+            print(bestFit)
+            print(best1)
+            cursor.execute("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference ='" + firstChoice + "' AND NOT broetchen = '" + bestFit + "';")
+            print("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference ='" + firstChoice + "';")
+            alternativeOne = cursor.fetchone()
+            cursor.execute("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference2 ='" + secondChoice + "' AND NOT broetchen = '" + bestFit + "';")
+            print("SELECT broetchen FROM vorgehensmodelle.broetchen WHERE preference2 ='" + secondChoice + "';")
+            alternativeTwo = cursor.fetchone()
+            recommendations = [best1, alternativeOne, alternativeTwo]
+            print(recommendations)
+            return render_template("alleKriterienUndEmpfehlung.html", recommendations=recommendations)
 
 
 if __name__ == "__main__":

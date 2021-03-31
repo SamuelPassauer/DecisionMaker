@@ -10,9 +10,9 @@
 <body style="background-color:#222222">
     <h1 style="color:#888888">Empfehlung</h1>
     <div class="btn-group-vertical" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary">Left</button>
-      <button type="button" class="btn btn-primary">Middle</button>
-      <button type="button" class="btn btn-primary">Right</button>
+        {% for val in recommendations %}
+            <button type="button" class="btn btn-primary" value="{{val[0]}}">{{val[0]}}</button>
+        {% endfor %}
     </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
