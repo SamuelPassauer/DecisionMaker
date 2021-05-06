@@ -12,7 +12,7 @@ conn = mysql.connector.connect(host="localhost",
 
 cursor = conn.cursor()
 
-'''Kriterien und Ausprägung'''
+''' -------------------------------- KRITERIEN UND AUSPRÄGUNG -------------------------------- '''
 auswahl_projektgroeße = ["Klein", "Mittel", "Groß"]
 auswahl_projekttyp =[]
 auswahl_technologielevel = ["Standardtechnologie", "Komplizierte Technologie", "Neue Technologie"]
@@ -109,35 +109,6 @@ inkrement_score = 0
 
 
 
-def projektgroeße():
-    projektgroeße = request.form.get("projektgroeße")
-    if projektgroeße == "Klein":
-        ahp_score += 1
-        cv_score += 1
-        bubble_sort_score += 1
-        stab_score += 1
-        product_backlog_planen_score += 1
-    elif verteilung == "Mittel":
-        msp_score += 1
-        cv_score += 1
-        numeral_assignment_score += 1
-        matrix_score += 1
-        projektstrukturplan_score += 1
-    elif verteilung == "Groß":
-        hcv_score += 1
-        msp_score += 1
-        reine_po_score += 1
-        projektstrukturplan_score += 1
-
-def inhalte_planen(product_backlog_planen_score, projektstrukturplan_score):
-    if projektstrukturplan_score > initialer_product_backlog_score:
-        print("Projektstrukturplan")
-    elif product_backlog_planen_score > projektstrukturplan_score:
-        print("Product Backlog")
-
-def anforderungen_priorisieren(ahp_score, cv_score, bubble_sort_score, numeral_assignment_score,hcv_score, msp_score)
-    anforderungen_priorisieren = [ahp_score, cv_score, bubble_sort_score, msp_score, numeral_assignment_score, hcv_score]
-    print(max(anforderungen_priorisieren))
 
 
 #Einbinden HTML templates
