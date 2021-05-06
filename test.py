@@ -1,4 +1,4 @@
-
+import operator
 
 """ -------------------------------- BAUSTEINE -------------------------------- """
 
@@ -17,10 +17,12 @@ kundenanforderungen_erheben = {"Beobachtungstechnik" : beobachtungstechnik_score
 def kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaetstechnik_score, befragungstechnik_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
-                            projektstrukturplan_score, netzplan_score)
+                            projektstrukturplan_score, netzplan_score, formale_score,
+                            uml_score, natürlichsprachig_score)
     z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score)
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
-                             reine_po_score, experten_score, algorithmisch_score)
+                             reine_po_score, experten_score, algorithmisch_score,
+                             formale_score, uml_score, natürlichsprachig_score)
     pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
                         matrix_score, reine_po_score, planning_poker_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
@@ -29,11 +31,12 @@ def kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaet
                                        burndown_score, eva_score, meilensteintrend_score)
     e = einsatz_messen(beobachtungstechnik_score, stab_score, reine_po_score, matrix_score)
     er = erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score,
-                          stab_score, experten_score)
+                          stab_score, experten_score, formale_score,
+                          uml_score, natürlichsprachig_score)
     b = bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score,
-                         projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
-                         reine_po_score)
-    v = verteilung_messen(beobachtungstechnik_score)
+                     projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
+                     reine_po_score, formale_score, uml_score, natürlichsprachig_score)
+    v = verteilung_messen(beobachtungstechnik_score, natürlichsprachig_score)
     beobachtungstechnik_score = z[8] + q[0] + pd[1] + e[0] + er[0] + v[0]
     befragungstechnik_score = z[7] + k[0] + pd[0] + ka[0]
     kreativitaetstechnik_score = k[1] + ka[5] + b[5]
@@ -87,17 +90,20 @@ def organisation_festlegen_methode(matrix_score, reine_po_score, stab_score):
                                  stab_score, reine_po_score, matrix_score, burndown_score)
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
-                            projektstrukturplan_score, netzplan_score)
+                            projektstrukturplan_score, netzplan_score, formale_score,
+                            uml_score, natürlichsprachig_score)
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
-                             reine_po_score, experten_score, algorithmisch_score)
+                             reine_po_score, experten_score, algorithmisch_score,
+                             formale_score, uml_score, natürlichsprachig_score)
     pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
                              matrix_score, reine_po_score, planning_poker_score)
     e = einsatz_messen(beobachtungstechnik_score, stab_score, reine_po_score, matrix_score)
     er = erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score,
-                          stab_score, experten_score)
+                          stab_score, experten_score, formale_score,
+                          uml_score, natürlichsprachig_score)
     b = bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score,
                      projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
-                     reine_po_score)
+                     reine_po_score, formale_score, uml_score, natürlichsprachig_score)
     matrix_score = p[6] + z[11] + k[2] + q[1] + pd[3] + e[3] + er[2] + b[1]
     reine_po_score = p[10] + z[10] + k[4] + q[3] + pd[4] + e[2] + er[1] + b[6]
     stab_score = p[2] + z[9] + k[3] + q[2] + pd[2] + e[1] + er[3] + b[0]
@@ -113,6 +119,37 @@ def organisation_festlegen_methode(matrix_score, reine_po_score, stab_score):
 #Rollen definieren
 
 #Anforderungsspezifikation
+formale_score = 0
+uml_score = 0
+natürlichsprachig_score = 0
+
+def anforderungsspezifikation_methode(formale_score, uml_score, natürlichsprachig_score):
+    k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
+                            stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
+                            projektstrukturplan_score, netzplan_score, formale_score,
+                            uml_score, natürlichsprachig_score)
+    q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
+                             reine_po_score, experten_score, algorithmisch_score,
+                             formale_score, uml_score, natürlichsprachig_score)
+    er = erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score,
+                          stab_score, experten_score, formale_score,
+                          uml_score, natürlichsprachig_score)
+    b = bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score,
+                     projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
+                     reine_po_score, formale_score, uml_score, natürlichsprachig_score)
+    v = verteilung_messen(beobachtungstechnik_score, natürlichsprachig_score)
+    formale_score = k[8] + q[6] + er[5] + b[7]
+    uml_score = k[9] + q[7] + er[6] + b[8]
+    natürlichsprachig_score = k[10] + q[8] + er[7] + b[9] + v[1]
+
+    anforderungsspezifikation = {"Formale Spezifikation": formale_score,
+                              "Grafische Spezifikation mit UML": uml_score,
+                              "Natürlichsprachige Spezifikation mit Sprachschablonen": natürlichsprachig_score}
+
+    print(anforderungsspezifikation)
+    print(max(anforderungsspezifikation, key=anforderungsspezifikation.get))
+
+
 
 #Anforderungen Priorisieren
 bubble_sort_score = 0
@@ -150,14 +187,15 @@ product_backlog_dokumentieren_score = 0
 def anforderungen_dokumentieren_methode(pflichtenheft_dokumentieren_score, product_backlog_dokumentieren_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
-                            projektstrukturplan_score, netzplan_score)
+                            projektstrukturplan_score, netzplan_score, formale_score,
+                            uml_score, natürlichsprachig_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
                                        burndown_score, eva_score, meilensteintrend_score)
     b = bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score,
-                         projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
-                         reine_po_score)
+                     projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
+                     reine_po_score, formale_score, uml_score, natürlichsprachig_score)
     s = stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
                            product_backlog_planen_score, burndown_score, meilensteintrend_score,
                            product_backlog_termine_score)
@@ -177,9 +215,10 @@ product_backlog_planen_score = 0 #p[3]
 projektstrukturplan_score = 0
 
 def inhalte_planen_methode(product_backlog_planen_score, projektstrukturplan_score):
-    k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score, stab_score,
-                            reine_po_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score,
-                            netzplan_score)
+    k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
+                            stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
+                            projektstrukturplan_score, netzplan_score, formale_score,
+                            uml_score, natürlichsprachig_score)
     p = projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score,
                       numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score,
                       reine_po_score)
@@ -188,8 +227,8 @@ def inhalte_planen_methode(product_backlog_planen_score, projektstrukturplan_sco
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
                                        burndown_score, eva_score, meilensteintrend_score)
     b = bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score,
-                         projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
-                         reine_po_score)
+                     projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
+                     reine_po_score, formale_score, uml_score, natürlichsprachig_score)
     s = stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
                            product_backlog_planen_score, burndown_score, meilensteintrend_score,
                            product_backlog_termine_score)
@@ -211,7 +250,8 @@ planning_poker_score = 0
 
 def aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_score, planning_poker_score):
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
-                             reine_po_score, experten_score, algorithmisch_score)
+                             reine_po_score, experten_score, algorithmisch_score,
+                             formale_score, uml_score, natürlichsprachig_score)
     pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
                              matrix_score, reine_po_score, planning_poker_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
@@ -219,10 +259,11 @@ def aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_scor
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
                                        burndown_score, eva_score, meilensteintrend_score)
     er = erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score,
-                          stab_score, experten_score)
+                          stab_score, experten_score, formale_score,
+                          uml_score, natürlichsprachig_score)
     b = bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score,
-                         projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
-                         reine_po_score)
+                     projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
+                     reine_po_score, formale_score, uml_score, natürlichsprachig_score)
     s = stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
                            product_backlog_planen_score, burndown_score, meilensteintrend_score,
                            product_backlog_termine_score)
@@ -247,7 +288,8 @@ product_backlog_termine_score = 0
 def termine_planen_methode(gantt_termine_score, netzplan_score, product_backlog_termine_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
-                            projektstrukturplan_score, netzplan_score)
+                            projektstrukturplan_score, netzplan_score, formale_score,
+                            uml_score, natürlichsprachig_score)
     s = stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
                            product_backlog_planen_score, burndown_score, meilensteintrend_score,
                            product_backlog_termine_score)
@@ -326,7 +368,7 @@ inkrement_score = 0
 zeitkritikalitaet = "Hoch"
 projektgroeße = "Groß"
 klarheit_anforderungen = "Unklar"
-verteilung = "Zentral", "Dezentral"
+verteilung = "Zentral"
 komplexitaet = "Hoch"
 qualifikation = "Professionell"
 projektdauer = "Kurz"
@@ -347,14 +389,15 @@ def stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_
         product_backlog_termine_score += 1
     return [projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score, product_backlog_planen_score, burndown_score, meilensteintrend_score, product_backlog_termine_score]
 
-def verteilung_messen(beobachtungstechnik_score):
+def verteilung_messen(beobachtungstechnik_score, natürlichsprachig_score):
     #if verteilung == "Zentral":
 
     if verteilung == "Dezentral":
         beobachtungstechnik_score -= 1
-    return [beobachtungstechnik_score]
+        natürlichsprachig_score += 1
+    return [beobachtungstechnik_score, natürlichsprachig_score]
 
-def bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score, reine_po_score):
+def bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score, reine_po_score, formale_score, uml_score, natürlichsprachig_score):
     if bedeutung == "Gering":
         stab_score += 1
     if bedeutung == "Groß":
@@ -368,27 +411,46 @@ def bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score
         pflichtenheft_dokumentieren_score += 1
         projektstrukturplan_score += 1
         tshirt_score -= 1
-    return [stab_score, matrix_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score, reine_po_score]
+        formale_score -= 1
+        natürlichsprachig_score += 1
+        uml_score += 1
+    return [stab_score, matrix_score, pflichtenheft_dokumentieren_score,
+            projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
+            reine_po_score, formale_score, uml_score, natürlichsprachig_score]
 
-def erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score, stab_score, experten_score):
+def erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score, stab_score, experten_score, formale_score, uml_score, natürlichsprachig_score):
     if erfahrung == "0 Jahre":
         beobachtungstechnik_score -= 1
         reine_po_score += 1
+        natürlichsprachig_score += 1
+        formale_score -= 1
     if erfahrung == "1,5+ Jahre":
         beobachtungstechnik_score -= 1
         matrix_score += 1
+        uml_score += 1
+        formale_score -= 1
     if erfahrung == "4+ Jahre":
         matrix_score += 1
+        uml_score += 1
+        formale_score -= 1
     if erfahrung == "7+ Jahre":
         stab_score += 1
         experten_score += 1
+        uml_score += 1
+        formale_score -= 1
     if erfahrung == "10+ Jahre":
         stab_score += 1
         experten_score += 1
+        uml_score += 1
+        formale_score -= 1
     if erfahrung == "15+ Jahre":
         stab_score += 1
         experten_score += 1
-    return [beobachtungstechnik_score, reine_po_score, matrix_score, stab_score, experten_score]
+        uml_score += 1
+        formale_score += 1
+    return [beobachtungstechnik_score, reine_po_score, matrix_score,
+            stab_score, experten_score, formale_score,
+            uml_score, natürlichsprachig_score]
 
 def einsatz_messen(beobachtungstechnik_score,stab_score, reine_po_score, matrix_score):
     if einsatz == "Nebenamtlich":
@@ -431,37 +493,49 @@ def projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab
         planning_poker_score += 1
     return [befragungstechnik_score, beobachtungstechnik_score, stab_score, matrix_score, reine_po_score, planning_poker_score]
 #Kriterium Qualifikation der Mitarbeiter
-def qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score, reine_po_score, experten_score, algorithmisch_score):
+def qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score, reine_po_score, experten_score, algorithmisch_score, formale_score, uml_score, natürlichsprachig_score):
     if qualifikation == "Professionell":
         beobachtungstechnik_score += 1
         reine_po_score += 1
         experten_score += 1
+        formale_score += 1
     if qualifikation == "Qualifiziert":
         beobachtungstechnik_score += 1
         matrix_score += 1
+        uml_score += 1
+        formale_score -= 1
     if qualifikation == "Wenig qualifiziert":
         stab_score += 1
         algorithmisch_score += 1
+        natürlichsprachig_score += 1
+        formale_score -= 1
     return [beobachtungstechnik_score, matrix_score, stab_score,
-            reine_po_score, experten_score, algorithmisch_score]
+            reine_po_score, experten_score, algorithmisch_score,
+            formale_score, uml_score, natürlichsprachig_score]
 
 
 #Kriterium Komplexität
-def komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score, stab_score, reine_po_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, netzplan_score):
-    if zeitkritikalitaet == "Gering":
+def komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,stab_score, reine_po_score, pflichtenheft_dokumentieren_score,projektstrukturplan_score, netzplan_score, formale_score, uml_score ,natürlichsprachig_score):
+    if komplexitaet == "Gering":
         stab_score += 1
-    if zeitkritikalitaet == "Mittel":
+        natürlichsprachig_score += 1
+        formale_score -= 1
+    if komplexitaet == "Mittel":
         matrix_score += 1
-    if zeitkritikalitaet == "Hoch":
+    if komplexitaet == "Hoch":
         reine_po_score += 1
         kreativitaetstechnik_score += 1
         befragungstechnik_score += 1
         pflichtenheft_dokumentieren_score -= 1
         projektstrukturplan_score += 1
         netzplan_score += 1
+        formale_score += 1
+        natürlichsprachig_score -= 1
+        uml_score += 1
     return [befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
-            projektstrukturplan_score, netzplan_score]
+            projektstrukturplan_score, netzplan_score, formale_score,
+            uml_score ,natürlichsprachig_score]
 
 #Kriterium Projektgröße
 def projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score, numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score, reine_po_score):
@@ -524,3 +598,4 @@ termine_planen_methode(gantt_termine_score, netzplan_score, product_backlog_term
 aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_score, planning_poker_score)
 fortschritt_bestimmen_methode(burndown_score, gantt_fortschritt_score)
 fortschritt_analysieren_methode(sprint_review_score, eva_score, meilensteintrend_score)
+anforderungsspezifikation_methode(formale_score, uml_score, natürlichsprachig_score)
