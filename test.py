@@ -1,6 +1,6 @@
 import operator
 
-""" -------------------------------- BAUSTEINE -------------------------------- """
+""" ---------------------------------------------------------------- BAUSTEINE ---------------------------------------------------------------- """
 
 
 #Projekt starten
@@ -18,13 +18,21 @@ def kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaet
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
-                            uml_score, natürlichsprachig_score)
-    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score)
+                            uml_score, natürlichsprachig_score, product_backlog_termine_score,
+                            gantt_termine_score)
+    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score,
+                                 numeral_assignment_score, hcv_score, msp_score,
+                                 beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score,
+                                 stab_score, reine_po_score, matrix_score,
+                                 burndown_score, netzplan_score, product_backlog_termine_score,
+                                 gantt_termine_score)
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
                              reine_po_score, experten_score, algorithmisch_score,
-                             formale_score, uml_score, natürlichsprachig_score)
+                             formale_score, uml_score, natürlichsprachig_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
-                        matrix_score, reine_po_score, planning_poker_score)
+                             matrix_score, reine_po_score, planning_poker_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
@@ -55,7 +63,12 @@ initialer_product_backlog_score = 0 #z[8]
 lastenheft_score = 0
 
 def kundenanforderungen_festhalten_funktion(initialer_product_backlog_score, lastenheft_score):
-    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score)
+    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score,
+                                 numeral_assignment_score, hcv_score, msp_score,
+                                 beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score,
+                                 stab_score, reine_po_score, matrix_score,
+                                 burndown_score, netzplan_score, product_backlog_termine_score,
+                                 gantt_termine_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
@@ -81,22 +94,29 @@ organisation_festlegen = {"Matrix Projektorganisation" : matrix_score,
                           "Reine Projektorganisation" : reine_po_score}
 
 def organisation_festlegen_methode(matrix_score, reine_po_score, stab_score):
-    p = projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score,
-                      numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score,
-                      reine_po_score)
+    p = projektgroeße(ahp_score, bubble_sort_score, stab_score,
+                      product_backlog_planen_score, cv_score, numeral_assignment_score,
+                      matrix_score, projektstrukturplan_score, hcv_score,
+                      msp_score, reine_po_score, netzplan_score,
+                      gantt_termine_score)
     z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score,
                                  numeral_assignment_score, hcv_score, msp_score,
                                  beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score,
-                                 stab_score, reine_po_score, matrix_score, burndown_score)
+                                 stab_score, reine_po_score, matrix_score,
+                                 burndown_score, netzplan_score, product_backlog_termine_score,
+                                 gantt_termine_score)
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
-                            uml_score, natürlichsprachig_score)
+                            uml_score, natürlichsprachig_score, product_backlog_termine_score,
+                            gantt_termine_score)
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
                              reine_po_score, experten_score, algorithmisch_score,
-                             formale_score, uml_score, natürlichsprachig_score)
+                             formale_score, uml_score, natürlichsprachig_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
-                             matrix_score, reine_po_score, planning_poker_score)
+                             matrix_score, reine_po_score, planning_poker_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     e = einsatz_messen(beobachtungstechnik_score, stab_score, reine_po_score, matrix_score)
     er = erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score,
                           stab_score, experten_score, formale_score,
@@ -127,10 +147,12 @@ def anforderungsspezifikation_methode(formale_score, uml_score, natürlichsprach
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
-                            uml_score, natürlichsprachig_score)
+                            uml_score, natürlichsprachig_score, product_backlog_termine_score,
+                            gantt_termine_score)
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
                              reine_po_score, experten_score, algorithmisch_score,
-                             formale_score, uml_score, natürlichsprachig_score)
+                             formale_score, uml_score, natürlichsprachig_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     er = erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score,
                           stab_score, experten_score, formale_score,
                           uml_score, natürlichsprachig_score)
@@ -160,10 +182,17 @@ msp_score = 0
 hcv_score = 0
 
 def anforderungen_priorisieren(ahp_score, cv_score, bubble_sort_score, numeral_assignment_score,hcv_score, msp_score):
-    p = projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score,
-                      numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score,
-                      reine_po_score)
-    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score)
+    p = projektgroeße(ahp_score, bubble_sort_score, stab_score,
+                      product_backlog_planen_score, cv_score, numeral_assignment_score,
+                      matrix_score, projektstrukturplan_score, hcv_score,
+                      msp_score, reine_po_score, netzplan_score,
+                      gantt_termine_score)
+    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score,
+                                 numeral_assignment_score, hcv_score, msp_score,
+                                 beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score,
+                                 stab_score, reine_po_score, matrix_score,
+                                 burndown_score, netzplan_score, product_backlog_termine_score,
+                                 gantt_termine_score)
     ahp_score = p[0] + z[0]
     bubble_sort_score = p[1] + z[1]
     cv_score = p[5] + z[3]
@@ -188,7 +217,8 @@ def anforderungen_dokumentieren_methode(pflichtenheft_dokumentieren_score, produ
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
-                            uml_score, natürlichsprachig_score)
+                            uml_score, natürlichsprachig_score, product_backlog_termine_score,
+                            gantt_termine_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
@@ -218,10 +248,13 @@ def inhalte_planen_methode(product_backlog_planen_score, projektstrukturplan_sco
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
-                            uml_score, natürlichsprachig_score)
-    p = projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score,
-                      numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score,
-                      reine_po_score)
+                            uml_score, natürlichsprachig_score, product_backlog_termine_score,
+                            gantt_termine_score)
+    p = projektgroeße(ahp_score, bubble_sort_score, stab_score,
+                      product_backlog_planen_score, cv_score, numeral_assignment_score,
+                      matrix_score, projektstrukturplan_score, hcv_score,
+                      msp_score, reine_po_score, netzplan_score,
+                      gantt_termine_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
@@ -240,6 +273,7 @@ def inhalte_planen_methode(product_backlog_planen_score, projektstrukturplan_sco
 
     print(inhalte_planen)
     print(max(inhalte_planen, key=inhalte_planen.get))
+    return inhalte_planen
 
 
 #Aufwände schätzen
@@ -251,9 +285,11 @@ planning_poker_score = 0
 def aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_score, planning_poker_score):
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
                              reine_po_score, experten_score, algorithmisch_score,
-                             formale_score, uml_score, natürlichsprachig_score)
+                             formale_score, uml_score, natürlichsprachig_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
-                             matrix_score, reine_po_score, planning_poker_score)
+                             matrix_score, reine_po_score, planning_poker_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
                                        initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score,
@@ -289,13 +325,32 @@ def termine_planen_methode(gantt_termine_score, netzplan_score, product_backlog_
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
-                            uml_score, natürlichsprachig_score)
+                            uml_score, natürlichsprachig_score, product_backlog_termine_score,
+                            gantt_termine_score)
     s = stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
                            product_backlog_planen_score, burndown_score, meilensteintrend_score,
                            product_backlog_termine_score)
-    netzplan_score = k[7]
-    product_backlog_termine_score = s[6]
-    gantt_termine_score = 0
+    p = projektgroeße(ahp_score, bubble_sort_score, stab_score,
+                      product_backlog_planen_score, cv_score, numeral_assignment_score,
+                      matrix_score, projektstrukturplan_score, hcv_score,
+                      msp_score, reine_po_score, netzplan_score,
+                      gantt_termine_score)
+    q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
+                             reine_po_score, experten_score, algorithmisch_score,
+                             formale_score, uml_score, natürlichsprachig_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
+    z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score,
+                                 numeral_assignment_score, hcv_score, msp_score,
+                                 beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score,
+                                 stab_score, reine_po_score, matrix_score,
+                                 burndown_score, netzplan_score, product_backlog_termine_score,
+                                 gantt_termine_score)
+    pd = projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score,
+                             matrix_score, reine_po_score, planning_poker_score,
+                             netzplan_score, product_backlog_termine_score, gantt_termine_score)
+    netzplan_score = k[7] + p[11] + q[9] + z[13] + pd[6]
+    product_backlog_termine_score = s[6] + k[11]+ q[10] + z[14] + pd[7]
+    gantt_termine_score = p[12] +k[12]+ q[11] + z[15] + pd[8]
 
     termine_planen = {"Netzplan": netzplan_score,
                       "Product Backlog Termine": product_backlog_termine_score,
@@ -364,7 +419,7 @@ ressourcen_veraendern_score = 0
 finales_produkt_score = 0
 inkrement_score = 0
 
-""" -------------------------------- KRITERIEN -------------------------------- """
+""" ---------------------------------------------------------------- KRITERIEN ---------------------------------------------------------------- """
 zeitkritikalitaet = "Hoch"
 projektgroeße = "Groß"
 klarheit_anforderungen = "Unklar"
@@ -480,48 +535,64 @@ def klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pfl
         meilensteintrend_score -=1
     return [befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score, initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score, burndown_score, eva_score, meilensteintrend_score]
 
-def projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score, matrix_score, reine_po_score, planning_poker_score):
+def projektdauer_messen(befragungstechnik_score, beobachtungstechnik_score, stab_score, matrix_score, reine_po_score, planning_poker_score, netzplan_score, product_backlog_termine_score, gantt_termine_score):
     if projektdauer == "Kurz":
         befragungstechnik_score -= 1
         beobachtungstechnik_score -= 1
         stab_score += 1
+        product_backlog_termine_score += 1
+        gantt_termine_score += 1
     if projektdauer == "Mittel":
         matrix_score += 1
+        product_backlog_termine_score += 1
+        gantt_termine_score += 1
     if projektdauer == "Lang":
         matrix_score += 1
         reine_po_score += 1
         planning_poker_score += 1
-    return [befragungstechnik_score, beobachtungstechnik_score, stab_score, matrix_score, reine_po_score, planning_poker_score]
+        netzplan_score += 1
+    return [befragungstechnik_score, beobachtungstechnik_score, stab_score,
+            matrix_score, reine_po_score, planning_poker_score,
+            netzplan_score, product_backlog_termine_score, gantt_termine_score]
 #Kriterium Qualifikation der Mitarbeiter
-def qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score, reine_po_score, experten_score, algorithmisch_score, formale_score, uml_score, natürlichsprachig_score):
+def qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score, reine_po_score, experten_score, algorithmisch_score, formale_score, uml_score, natürlichsprachig_score, netzplan_score, product_backlog_termine_score, gantt_termine_score):
     if qualifikation == "Professionell":
         beobachtungstechnik_score += 1
         reine_po_score += 1
         experten_score += 1
         formale_score += 1
+        netzplan_score += 1
+        product_backlog_termine_score += 1
     if qualifikation == "Qualifiziert":
         beobachtungstechnik_score += 1
         matrix_score += 1
         uml_score += 1
         formale_score -= 1
+        product_backlog_termine_score += 1
     if qualifikation == "Wenig qualifiziert":
         stab_score += 1
         algorithmisch_score += 1
         natürlichsprachig_score += 1
         formale_score -= 1
+        gantt_termine_score += 1
+        netzplan_score -= 1
     return [beobachtungstechnik_score, matrix_score, stab_score,
             reine_po_score, experten_score, algorithmisch_score,
-            formale_score, uml_score, natürlichsprachig_score]
+            formale_score, uml_score, natürlichsprachig_score,
+            netzplan_score, product_backlog_termine_score, gantt_termine_score]
 
 
 #Kriterium Komplexität
-def komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,stab_score, reine_po_score, pflichtenheft_dokumentieren_score,projektstrukturplan_score, netzplan_score, formale_score, uml_score ,natürlichsprachig_score):
+def komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,stab_score, reine_po_score, pflichtenheft_dokumentieren_score,projektstrukturplan_score, netzplan_score, formale_score, uml_score ,natürlichsprachig_score, product_backlog_termine_score, gantt_termine_score):
     if komplexitaet == "Gering":
         stab_score += 1
         natürlichsprachig_score += 1
         formale_score -= 1
+        gantt_termine_score += 1
+        product_backlog_termine_score += 1
     if komplexitaet == "Mittel":
         matrix_score += 1
+        gantt_termine_score += 1
     if komplexitaet == "Hoch":
         reine_po_score += 1
         kreativitaetstechnik_score += 1
@@ -535,16 +606,18 @@ def komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, mat
     return [befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
             projektstrukturplan_score, netzplan_score, formale_score,
-            uml_score ,natürlichsprachig_score]
+            uml_score ,natürlichsprachig_score, product_backlog_termine_score,
+            gantt_termine_score]
 
 #Kriterium Projektgröße
-def projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score, numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score, reine_po_score):
+def projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score, numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score, reine_po_score, netzplan_score, gantt_termine_score):
     if projektgroeße == "Klein":
         ahp_score += 1
         cv_score += 1
         bubble_sort_score += 1
         stab_score += 1
         product_backlog_planen_score += 1
+        gantt_termine_score += 1
     if projektgroeße == "Mittel":
         msp_score += 1
         cv_score += 1
@@ -556,18 +629,25 @@ def projektgroeße(ahp_score, bubble_sort_score, stab_score, product_backlog_pla
         msp_score += 1
         reine_po_score += 1
         projektstrukturplan_score += 1
-    return [ahp_score, bubble_sort_score, stab_score, product_backlog_planen_score, cv_score, numeral_assignment_score, matrix_score, projektstrukturplan_score, hcv_score, msp_score, reine_po_score]
+        netzplan_score += 1
+    return [ahp_score, bubble_sort_score, stab_score,
+            product_backlog_planen_score, cv_score, numeral_assignment_score,
+            matrix_score, projektstrukturplan_score, hcv_score,
+            msp_score, reine_po_score, netzplan_score,
+            gantt_termine_score]
 
-def zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score):
+def zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, beobachtungstechnik_score, befragungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score, netzplan_score, product_backlog_termine_score,gantt_termine_score):
     if zeitkritikalitaet == "Gering":
         ahp_score += 1
         befragungstechnik_score += 1
         beobachtungstechnik_score += 1
         stab_score += 1
+        netzplan_score += 1
     if zeitkritikalitaet == "Mittel":
         numeral_assignment_score +=1
         bubble_sort_score +=1
         matrix_score += 1
+        gantt_termine_score += 1
     if zeitkritikalitaet == "Hoch":
         msp_score += 1
         cv_score += 1
@@ -577,7 +657,14 @@ def zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score, numeral_ass
         initialer_product_backlog_score += 1
         reine_po_score += 1
         burndown_score += 1
-    return [ahp_score, bubble_sort_score, cv_score, numeral_assignment_score, hcv_score, msp_score, befragungstechnik_score, beobachtungstechnik_score, initialer_product_backlog_score, stab_score, reine_po_score, matrix_score, burndown_score]
+        netzplan_score -= 1
+        product_backlog_termine_score += 1
+    return [ahp_score, bubble_sort_score, cv_score,
+            numeral_assignment_score, hcv_score, msp_score,
+            befragungstechnik_score, beobachtungstechnik_score, initialer_product_backlog_score,
+            stab_score, reine_po_score, matrix_score,
+            burndown_score, netzplan_score, product_backlog_termine_score,
+            gantt_termine_score]
 
 def inhalte_planen(product_backlog_planen_score, projektstrukturplan_score):
     if projektstrukturplan_score > initialer_product_backlog_score:
@@ -599,3 +686,5 @@ aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_score, p
 fortschritt_bestimmen_methode(burndown_score, gantt_fortschritt_score)
 fortschritt_analysieren_methode(sprint_review_score, eva_score, meilensteintrend_score)
 anforderungsspezifikation_methode(formale_score, uml_score, natürlichsprachig_score)
+
+

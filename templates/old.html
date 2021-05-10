@@ -70,3 +70,22 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+    <div style="float:left">
+            <form>
+              <div class="form-group">
+                <label for="formControlRange">Example Range input</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+              </div>
+            </form>
+
+        <div class="tab">Einsatzzeit des Teams
+                  <p><select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="second">
+                      {% for element in auswahl_einsatz %}
+                    <option value="{{element}}">{{element}}</option>
+                      {% endfor %}
+                  </select></p>
+                  <input type="submit" value="Bestätigen" onclick="showInput();"><br/>
+                </div>
