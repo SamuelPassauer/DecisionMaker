@@ -1,43 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Ihr Vorgehensmodell</title>
-</head>
-<body>
-    <h1>Ihr Vorgehensmodell</h1>
-    <div float:left>
-        <h2>Ihre gewählten Kriterien</h2>
-        <p>Projektgröße: {{projektgroeße}}</p>
-        <p>Komplexität: {{komplexitaet}}</p>
-        <p>Projektdauer: {{projektdauer}}</p>
-        <p>Klarheit der Anforderungen: {{klarheit_anforderungen}}</p>
-        <p>Einsatzzeit der Mitarbeiter: {{einsatz}}</p>
-        <p>Höchste Erfahrungsstufe im Team: {{erfahrung}}</p>
-        <p>Bedeutung für das Unternehmen: {{bedeutung}}</p>
-        <p>Zeitkritikalität: {{zeitkritikalitaet}}</p>
-        <p>Verteilung der Projektbeteiligten: {{verteilung}}</p>
-        <p>Stabilität der Anforderungen: {{stabilitaet}}</p>
-        <p>Qualifikation der Mitarbeiter: {{qualifikation}}</p>
-    </div>
-    <div float: right>
-        <h2>Ihr getailortes Vorgehensmodell</h2>
+{% extends "vorlage.html" %}
+{% block title %}Ihr Vorgehensmodell{% endblock %}
+{% block headingleft %}Gewählte Kriterien{% endblock %}
+{% block leftdiv %}
+        <p width="180px">Projektgröße: {{projektgroeße}}</p>
+        <p width="180px">Komplexität: {{komplexitaet}}</p>
+        <p width="180px">Projektdauer: {{projektdauer}}</p>
+        <p width="180px">Klarheit der Anforderungen: {{klarheit_anforderungen}}</p>
+        <p width="180px">Einsatzzeit der Mitarbeiter: {{einsatz}}</p>
+        <p width="180px">Höchste Erfahrungsstufe im Team: {{erfahrung}}</p>
+        <p width="180px">Bedeutung für das Unternehmen: {{bedeutung}}</p>
+        <p width="180px">Zeitkritikalität: {{zeitkritikalitaet}}</p>
+        <p width="180px">Verteilung der Projektbeteiligten: {{verteilung}}</p>
+        <p width="180px">Stabilität der Anforderungen: {{stabilitaet}}</p>
+        <p width="180px">Qualifikation der Mitarbeiter: {{qualifikation}}</p>
+{% endblock %}
 
-        {% for key,value in vorgehensmodell.items() %}
-       <p> {{key}}: {{value}} </p>
-        {% endfor %}
+{% block headingright %}Getailortes Vorgehensmodell{% endblock %}
+{% block rightdiv %}
+    <div style="float: left">
+        <h2 align="center">Vorgehensschritt</h2>
+        <ul class="list-group" width="180px">
+            {% for key,value in vorgehensmodell.items() %}
+              <li class="list-group-item" style="color: #222222" width="180px" > {{key}} </li>
+            {% endfor %}
+        </ul>
     </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+
+    <div style="float: right">
+        <h2 align="center">Methode</h2>
+        <ul class="list-group" width="180px">
+            {% for key,value in vorgehensmodell.items() %}
+                <li class="list-group-item" style="color: #222222" width="180px" ><a href="http://127.0.0.1:5000/{{value.replace(" ", "_")}}"> {{value}} </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}
