@@ -9,11 +9,12 @@
 </head>
 <body style="background-color:#222222; color: white">
     <div style="float: left">
-        <h1 align="center">{% block headingleft %}{% endblock %}</h1>
         {% block leftdiv %}{% endblock %}
     </div>
+    <div>
+        {% block middlediv %}{% endblock %}
+    </div>
     <div style="float: right">
-        <h1 align="center">{% block headingright %}{% endblock %}</h1>
         {% block rightdiv %}{% endblock %}
     </div>
 

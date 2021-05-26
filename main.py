@@ -45,7 +45,8 @@ kriterienauswahl = {"Projektgröße": auswahl_projektgroeße,
 
 beschreibung = {"Projektgröße": "Die Projektgröße richtet sich nach der Anzahl der Anforderungen und dem Aufwand für Managament und Koordination.",
                 "Teamgröße": "Die Teamgröße ist die Anzahl der im Projektteam arbeitenden Personen.",
-                "Komplexität": "Die Komplexität setzt sich aus sozialer und inhaltlicher Komplexität zusammen. Somit steigt die Komplexität, wenn die Anzahl der Beteiligten am Projekt steigt und wenn die Vernetzung der Elemente im Projekt und deren Dynamik steigt.",
+                "Komplexität": "Die Komplexität setzt sich aus sozialer und inhaltlicher Komplexität zusammen. "
+                               "Somit steigt die Komplexität, wenn die Anzahl der Beteiligten am Projekt steigt und wenn die Vernetzung der Elemente im Projekt und deren Dynamik steigt.",
                 "Projektdauer": "Die Projektdauer stellt die Dauer des Projekts dar.",
                 "Klarheit der Anforderungen": "Die Klarheit der Anforderungen soll zu Projektbeginn abgeschätzt werden. Sind die Anforderungen unklar, so muss im Projekt mehr Aufwand investiert werden, um Klarheit über die Anforderungen zu erlangen.",
                 "Einsatzzeit der Mitarbeiter": "Das Einsatzzeit der Mitarbeiter wird an deren Einsatz am Projekt gemessen.",
@@ -1009,6 +1010,8 @@ def kriterienwahl():
         verteilung = request.form["Verteilung der Projektbeteiligten"]
         stabilitaet = request.form["Stabilität der Anforderungen"]
         qualifikation = request.form["Qualifikation der Mitarbeiter"]
+        technologielevel = request.form["Technologielevel"]
+        projekttyp = request.form["Projekttyp"]
 
         #Methoden zum Berechnen der Vorgehensbausteine
         pm_prozess = pm_prozess_festlegen_methode(phasen_vorgehen, agiles_vorgehen)
@@ -1047,7 +1050,7 @@ def kriterienwahl():
                                einsatz=einsatz, erfahrung=erfahrung, bedeutung=bedeutung,
                                zeitkritikalitaet=zeitkritikalitaet, pm_prozess=pm_prozess,
                                verteilung=verteilung, stabilitaet=stabilitaet, qualifikation=qualifikation,
-                               vorgehensmodell=vorgehensmodell)
+                               technologielevel=technologielevel, projekttyp=projekttyp, vorgehensmodell=vorgehensmodell)
 
     else:
         return render_template("kriterienwahl.html", kriterienauswahl=kriterienauswahl, beschreibung=beschreibung)
@@ -1067,6 +1070,8 @@ def anzeige():
         verteilung = request.form["Verteilung der Projektbeteiligten"]
         stabilitaet = request.form["Stabilität der Anforderungen"]
         qualifikation = request.form["Qualifikation der Mitarbeiter"]
+        technologielevel = request.form["Technologielevel"]
+        projekttyp = request.form["Projekttyp"]
 
         pm_prozess = pm_prozess_festlegen_methode(phasen_vorgehen, agiles_vorgehen)
         erheben = kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaetstechnik_score, befragungstechnik_score)
@@ -1097,7 +1102,7 @@ def anzeige():
                            }
         return render_template("anzeige.html", komplexitaet=komplexitaet, projektgroeße=projektgroeße, projektdauer=projektdauer, klarheit_anforderungen=klarheit_anforderungen,
                                einsatz=einsatz, erfahrung=erfahrung, bedeutung=bedeutung, zeitkritikalitaet=zeitkritikalitaet, teamgroeße=teamgroeße,
-                               verteilung=verteilung, stabilitaet=stabilitaet, qualifikation=qualifikation, vorgehensmodell=vorgehensmodell)
+                               verteilung=verteilung, stabilitaet=stabilitaet, qualifikation=qualifikation, technologielevel=technologielevel, projekttyp=projekttyp, vorgehensmodell=vorgehensmodell)
     else:
         return render_template("anzeige.html")
 

@@ -1,38 +1,65 @@
-{% extends "vorlage.html" %}
-{% block title %}Ihr Vorgehensmodell{% endblock %}
-{% block headingleft %}Gewählte Kriterien{% endblock %}
-{% block leftdiv %}
-        <p width="180px">Projektgröße: {{projektgroeße}}</p>
-        <p width="180px">Komplexität: {{komplexitaet}}</p>
-        <p width="180px">Projektdauer: {{projektdauer}}</p>
-        <p width="180px">Klarheit der Anforderungen: {{klarheit_anforderungen}}</p>
-        <p width="180px">Einsatzzeit der Mitarbeiter: {{einsatz}}</p>
-        <p width="180px">Höchste Erfahrungsstufe im Team: {{erfahrung}}</p>
-        <p width="180px">Bedeutung für das Unternehmen: {{bedeutung}}</p>
-        <p width="180px">Zeitkritikalität: {{zeitkritikalitaet}}</p>
-        <p width="180px">Verteilung der Projektbeteiligten: {{verteilung}}</p>
-        <p width="180px">Stabilität der Anforderungen: {{stabilitaet}}</p>
-        <p width="180px">Qualifikation der Mitarbeiter: {{qualifikation}}</p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body style="background-color:#222222; color: white">
+    <div>
+        <h1 align="center">Getailortes Vorgehensmodell</h1>
+        <div width="100px" style="float: left">      </div>
+        <div style="float:left">
+            <h2 align="center">Gewählte Kriterien</h2>
+            <ul class="list-group" width="180px">
+                <li class="list-group-item" style="color: #222222;">Projektgröße: {{projektgroeße}}</li>
+                <li class="list-group-item" style="color: #222222">Komplexität: {{komplexitaet}}</li>
+                <li class="list-group-item" style="color: #222222">Projektdauer: {{projektdauer}}</li>
+                <li class="list-group-item" style="color: #222222">Klarheit der Anforderungen: {{klarheit_anforderungen}}</li>
+                <li class="list-group-item" style="color: #222222">Einsatzzeit der Mitarbeiter: {{einsatz}}</li>
+                <li class="list-group-item" style="color: #222222">Höchste Erfahrungsstufe im Team: {{erfahrung}}</li>
+                <li class="list-group-item" style="color: #222222">Bedeutung für das Unternehmen: {{bedeutung}}</li>
+                <li class="list-group-item" style="color: #222222">Zeitkritikalität: {{zeitkritikalitaet}}</li>
+                <li class="list-group-item" style="color: #222222">Verteilung der Projektbeteiligten: {{verteilung}}</li>
+                <li class="list-group-item" style="color: #222222">Stabilität der Anforderungen: {{stabilitaet}}</li>
+                <li class="list-group-item" style="color: #222222">Qualifikation der Mitarbeiter: {{qualifikation}}</li>
+                <li class="list-group-item" style="color: #222222">Technologielevel: {{technologielevel}}</li>
+                <li class="list-group-item" style="color: #222222">Projekttyp: {{projekttyp}}</li>
+            </ul>
+        </div>
+        <div width="100px" style="float: right">      </div>
+        <div style="float: right">
+            <h2 align="center">Methode</h2>
+            <ul class="list-group" width="180px">
+                {% for key,value in vorgehensmodell.items() %}
+                    <li class="list-group-item" style="color: #222222"><a href="http://127.0.0.1:5000/{{value.replace(" ", "_")}}"> {{value}} </a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
-{% block headingright %}Getailortes Vorgehensmodell{% endblock %}
-{% block rightdiv %}
-    <div style="float: left">
-        <h2 align="center">Vorgehensschritt</h2>
-        <ul class="list-group" width="180px">
-            {% for key,value in vorgehensmodell.items() %}
-              <li class="list-group-item" style="color: #222222" width="180px" > {{key}} </li>
-            {% endfor %}
-        </ul>
+        <div style="float: right">
+            <h2 align="center">Vorgehensschritt</h2>
+            <ul class="list-group" width="180px">
+                {% for key,value in vorgehensmodell.items() %}
+                    <li class="list-group-item" style="color: #222222"> {{key}} </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
-    <div style="float: right">
-        <h2 align="center">Methode</h2>
-        <ul class="list-group" width="180px">
-            {% for key,value in vorgehensmodell.items() %}
-                <li class="list-group-item" style="color: #222222" width="180px" ><a href="http://127.0.0.1:5000/{{value.replace(" ", "_")}}"> {{value}} </a></li>
-            {% endfor %}
-        </ul>
-    </div>
 
-{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
