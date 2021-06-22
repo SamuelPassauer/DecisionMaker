@@ -1,6 +1,10 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flaskext.mysql import MySQL
 app = Flask(__name__)
+'''Die Berechnung aller Scores für die Methoden innerhalb der Tailoringbausteine folgt dem gleichen Prinzip. 
+Deshalb ist nur beispielhaft in der Methode kundenanforderungen_erheben_funktion das Vorgehen beschrieben'''
+
+
 
 ''' ---------------------------------------------------------------- KRITERIEN UND AUSPRÄGUNG ---------------------------------------------------------------- '''
 #Speichern der Werte aller Kriterien welche auf der Auswahlseite angezeigt werden
@@ -18,7 +22,7 @@ auswahl_verteilung = ["Zentral", "Dezentral"]
 auswahl_stabilitaet_anforderungen = ["Stabil", "Volatil"]
 auswahl_technologielevel_messen = ["Neue Technologie", "Standardtechnologie", "Komplizierte Technologie"]
 auswahl_projekttyp = ["Original Design", "Parametric Design", "Configuration Design", "Redesign Project", "Selection Design"]
-
+#Zuweisen der Werte zu den Kriterien
 kriterienauswahl = {"Projektgröße": auswahl_projektgroeße,
                     "Teamgröße": auswahl_teamgroeße,
                     "Komplexität": auswahl_komplexitaet,
@@ -33,7 +37,7 @@ kriterienauswahl = {"Projektgröße": auswahl_projektgroeße,
                     "Qualifikation der Mitarbeiter": auswahl_qualifikation,
                     "Technologielevel": auswahl_technologielevel_messen,
                     "Projekttyp": auswahl_projekttyp}
-
+# Zuordnen der Kriterien zu deren Beschreibung
 beschreibung = {"Projektgröße": "Die Projektgröße richtet sich nach der Anzahl der Anforderungen und dem Aufwand für Managament und Koordination.",
                 "Teamgröße": "Die Teamgröße ist die Anzahl der im Projektteam arbeitenden Personen.",
                 "Komplexität": "Die Komplexität setzt sich aus sozialer und inhaltlicher Komplexität zusammen. "
@@ -57,16 +61,14 @@ beschreibung = {"Projektgröße": "Die Projektgröße richtet sich nach der Anza
 
 """ ---------------------------------------------------------------- BAUSTEINE ---------------------------------------------------------------- """
 
-
-#Projekt starten
-#Grobziele definieren
-
 #Kundenanforderungen erheben
 beobachtungstechnik_score = 0
 befragungstechnik_score = 0
 kreativitaetstechnik_score = 0
 
+#Berechnung des Scores für Kundenanforderungen erheben
 def kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaetstechnik_score, befragungstechnik_score):
+    #Auslesen aller Werte der Kriterien
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
                             projektstrukturplan_score, netzplan_score, formale_score,
@@ -109,15 +111,15 @@ def kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaet
                       befragungstechnik_score, lastenheft_score, projektstrukturplan_score,
                       algorithmisch_score, netzplan_score, eva_score,
                       meilensteintrend_score)
-
+    #Addieren aller berechneten Scores
     beobachtungstechnik_score = z[8] + q[0] + pd[1] + e[0] + er[0] + v[0]
     befragungstechnik_score = z[7] + k[0] + pd[0] + ka[0] + pt[6]
     kreativitaetstechnik_score = k[1] + ka[5] + b[5] + t[0] + pt[0]
-
+    #Zuweisen der Scores zu den Methoden
     kundenanforderungen_erheben = {"Beobachtungstechnik": beobachtungstechnik_score,
                                    "Befragungstechnik": befragungstechnik_score,
                                    "Kreativitätstechnik": kreativitaetstechnik_score}
-
+    #Ausgeben der Methode mit höchstem Score
     return max(kundenanforderungen_erheben, key=kundenanforderungen_erheben.get)
 
 
@@ -125,7 +127,7 @@ def kundenanforderungen_erheben_funktion(beobachtungstechnik_score, kreativitaet
 #Kundenanforderungen festhalten
 initialer_product_backlog_score = 0 #z[8]
 lastenheft_score = 0
-
+#Berechnung des Scores für Kundenanforderungen feshalten
 def kundenanforderungen_festhalten_funktion(initialer_product_backlog_score, lastenheft_score):
     z = zeitkritikalitaet_messen(ahp_score, bubble_sort_score, cv_score,
                                  numeral_assignment_score, hcv_score, msp_score,
@@ -162,7 +164,7 @@ def kundenanforderungen_festhalten_funktion(initialer_product_backlog_score, las
 #PM-Prozess festlegen
 phasen_vorgehen = 0
 agiles_vorgehen = 0
-
+#Berechnung des Scores für PM Prozess festlegen
 def pm_prozess_festlegen_methode(phasen_vorgehen, agiles_vorgehen):
     s = stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
                            product_backlog_planen_score, burndown_score, meilensteintrend_score,
@@ -207,7 +209,7 @@ matrix_score = 0
 stab_score = 0
 reine_po_score = 0
 
-
+#Berechnung des Scores für Organisation festlegen
 def organisation_festlegen_methode(matrix_score, reine_po_score, stab_score):
     p = projektgroeße(ahp_score, bubble_sort_score, stab_score,
                       product_backlog_planen_score, cv_score, numeral_assignment_score,
@@ -256,14 +258,11 @@ def organisation_festlegen_methode(matrix_score, reine_po_score, stab_score):
 
     return max(organisation_festlegen, key=organisation_festlegen.get)
 
-
-#Rollen definieren
-
 #Anforderungsspezifikation
 formale_score = 0
 uml_score = 0
 natürlichsprachig_score = 0
-
+#Berechnung des Scores für Anforderungsspezifikation
 def anforderungsspezifikation_methode(formale_score, uml_score, natürlichsprachig_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
@@ -291,8 +290,6 @@ def anforderungsspezifikation_methode(formale_score, uml_score, natürlichsprach
 
     return max(anforderungsspezifikation, key=anforderungsspezifikation.get)
 
-
-
 #Anforderungen Priorisieren
 bubble_sort_score = 0
 numeral_assignment_score = 0
@@ -300,7 +297,7 @@ ahp_score = 0
 cv_score = 0
 msp_score = 0
 hcv_score = 0
-
+#Berechnung des Scores für Anforderungen priorisieren
 def anforderungen_priorisieren(ahp_score, cv_score, bubble_sort_score, numeral_assignment_score,hcv_score, msp_score):
     p = projektgroeße(ahp_score, bubble_sort_score, stab_score,
                       product_backlog_planen_score, cv_score, numeral_assignment_score,
@@ -332,7 +329,7 @@ def anforderungen_priorisieren(ahp_score, cv_score, bubble_sort_score, numeral_a
 #Anforderungen dokumentieren
 pflichtenheft_dokumentieren_score = 0
 product_backlog_dokumentieren_score = 0
-
+#Berechnung des Scores für Anforderungen dokumentieren
 def anforderungen_dokumentieren_methode(pflichtenheft_dokumentieren_score, product_backlog_dokumentieren_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
@@ -365,12 +362,10 @@ def anforderungen_dokumentieren_methode(pflichtenheft_dokumentieren_score, produ
 
     return max(anforderungen_dokumentieren, key=anforderungen_dokumentieren.get)
 
-#Phasen und Meilensteine festlegen
-
 #Inhalte planen
 product_backlog_planen_score = 0 #p[3]
 projektstrukturplan_score = 0
-
+#Berechnung des Scores für Inhalte planen
 def inhalte_planen_methode(product_backlog_planen_score, projektstrukturplan_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
@@ -421,7 +416,7 @@ experten_score = 0
 algorithmisch_score = 0
 tshirt_score = 0
 planning_poker_score = 0
-
+#Berechnung des Scores für Aufwände schätzen
 def aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_score, planning_poker_score):
     q = qualifikation_messen(beobachtungstechnik_score, matrix_score, stab_score,
                              reine_po_score, experten_score, algorithmisch_score,
@@ -472,7 +467,7 @@ def aufwaende_schaetzen_methode(experten_score, algorithmisch_score, tshirt_scor
 gantt_termine_score = 0
 netzplan_score = 0
 product_backlog_termine_score = 0
-
+#Berechnung des Scores für Termine planen
 def termine_planen_methode(gantt_termine_score, netzplan_score, product_backlog_termine_score):
     k = komplexitaet_messen(befragungstechnik_score, kreativitaetstechnik_score, matrix_score,
                             stab_score, reine_po_score, pflichtenheft_dokumentieren_score,
@@ -522,17 +517,10 @@ def termine_planen_methode(gantt_termine_score, netzplan_score, product_backlog_
 
     return max(termine_planen, key=termine_planen.get)
 
-#Iterative Detailplanung
-sprint_backlog_score = 0
-'''??'''
-
-#Prozessmodell für Systementwicklung festlegen
-agil_score = 0
-klassisch_score = 0
-
 #Fortschritt bestimmen
 burndown_score = 0
 gantt_fortschritt_score = 0
+#Berechnung des Scores für Fortschritt bestimmen
 def fortschritt_bestimmen_methode(burndown_score, gantt_fortschritt_score):
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
@@ -566,7 +554,7 @@ def fortschritt_bestimmen_methode(burndown_score, gantt_fortschritt_score):
 sprint_review_score = 0
 eva_score = 0
 meilensteintrend_score = 0
-
+#Berechnung des Scores für Fortschritt analysieren
 def fortschritt_analysieren_methode(sprint_review_score, eva_score, meilensteintrend_score):
     ka = klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score,
                                        projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score,
