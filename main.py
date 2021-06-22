@@ -1,18 +1,9 @@
 from flask import Flask, redirect, url_for, render_template, request
 from flaskext.mysql import MySQL
-import mysql.connector
 app = Flask(__name__)
 
-
-conn = mysql.connector.connect(host="localhost",
-                               user='root',
-                               password='adesso',
-                               database='vorgehensmodelle',
-                               auth_plugin='mysql_native_password')
-
-cursor = conn.cursor()
-
 ''' ---------------------------------------------------------------- KRITERIEN UND AUSPRÄGUNG ---------------------------------------------------------------- '''
+#Speichern der Werte aller Kriterien welche auf der Auswahlseite angezeigt werden
 auswahl_projektgroeße = ["Klein", "Mittel", "Groß"]
 auswahl_teamgroeße = ["Klein", "Mittel", "Groß"]
 auswahl_komplexitaet = ["Gering", "Mittel", "Hoch"]
