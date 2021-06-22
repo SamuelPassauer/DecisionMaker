@@ -607,16 +607,8 @@ def fortschritt_analysieren_methode(sprint_review_score, eva_score, meilensteint
 
     return max(fortschritt_analysieren, key=fortschritt_analysieren.get)
 
-#Fortschritt steuern
-sprint_retrospektive_score = 0
-ressourcen_veraendern_score = 0
-
-#Ergebnisse übergeben
-finales_produkt_score = 0
-inkrement_score = 0
-
 """ ---------------------------------------------------------------- KRITERIEN ---------------------------------------------------------------- """
-
+# Kriterium Stabilität der Anforderungen
 def stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score, product_backlog_planen_score, burndown_score, meilensteintrend_score, product_backlog_termine_score, phasen_vorgehen, agiles_vorgehen):
     stabilitaet = request.form["Stabilität der Anforderungen"]
     if stabilitaet == "Stabil":
@@ -633,7 +625,7 @@ def stabilitaet_messen(projektstrukturplan_score, product_backlog_dokumentieren_
     return [projektstrukturplan_score, product_backlog_dokumentieren_score, tshirt_score,
             product_backlog_planen_score, burndown_score, meilensteintrend_score,
             product_backlog_termine_score, phasen_vorgehen, agiles_vorgehen]
-
+#Kriterium Verteilung der Projektbeteiligten
 def verteilung_messen(beobachtungstechnik_score, natürlichsprachig_score, phasen_vorgehen, agiles_vorgehen):
     verteilung = request.form["Verteilung der Projektbeteiligten"]
     if verteilung == "Zentral":
@@ -643,7 +635,7 @@ def verteilung_messen(beobachtungstechnik_score, natürlichsprachig_score, phase
         natürlichsprachig_score += 1
         phasen_vorgehen
     return [beobachtungstechnik_score, natürlichsprachig_score, phasen_vorgehen, agiles_vorgehen]
-
+#Kriterium Bedeutung für das Unternehmen
 def bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score, reine_po_score, formale_score, uml_score, natürlichsprachig_score):
     bedeutung = request.form["Bedeutung für das Unternehmen"]
     if bedeutung == "Gering":
@@ -665,7 +657,7 @@ def bedeutung_messen(stab_score, matrix_score, pflichtenheft_dokumentieren_score
     return [stab_score, matrix_score, pflichtenheft_dokumentieren_score,
             projektstrukturplan_score, tshirt_score, kreativitaetstechnik_score,
             reine_po_score, formale_score, uml_score, natürlichsprachig_score]
-
+#Kriterium Höchste Erfahrungsstufe im Team
 def erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score, stab_score, experten_score, formale_score, uml_score, natürlichsprachig_score):
     erfahrung = request.form["Höchste Erfahrungsstufe im Team"]
     if erfahrung == "0 Jahre":
@@ -700,7 +692,7 @@ def erfahrung_messen(beobachtungstechnik_score, reine_po_score, matrix_score, st
     return [beobachtungstechnik_score, reine_po_score, matrix_score,
             stab_score, experten_score, formale_score,
             uml_score, natürlichsprachig_score]
-
+#Kriterium Einsatz(-zeit)
 def einsatz_messen(beobachtungstechnik_score,stab_score, reine_po_score, matrix_score):
     einsatz = request.form["Einsatzzeit der Mitarbeiter"]
     if einsatz == "Nebenamtlich":
@@ -713,7 +705,7 @@ def einsatz_messen(beobachtungstechnik_score,stab_score, reine_po_score, matrix_
         beobachtungstechnik_score -= 1
         matrix_score += 1
     return [beobachtungstechnik_score, stab_score, reine_po_score, matrix_score]
-
+#Kriterium Klarheit der Anforderungen
 def klarheit_anforderungen_messen(befragungstechnik_score, lastenheft_score, pflichtenheft_dokumentieren_score, projektstrukturplan_score, gantt_fortschritt_score, kreativitaetstechnik_score, initialer_product_backlog_score, product_backlog_dokumentieren_score, tshirt_score, burndown_score, eva_score, meilensteintrend_score, phasen_vorgehen, agiles_vorgehen):
     klarheit_anforderungen = request.form["Klarheit der Anforderungen"]
     if klarheit_anforderungen == "Klar":
